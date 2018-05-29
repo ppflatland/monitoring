@@ -1,0 +1,14 @@
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS `Status_Code` (
+	`id_server`	INTEGER,
+	`code`	TEXT,
+	`time`	TEXT
+);
+INSERT INTO `Status_Code` VALUES ('s3',NULL,NULL);
+INSERT INTO `Status_Code` VALUES ('s2','504','15:43');
+INSERT INTO `Status_Code` VALUES ('s4',NULL,NULL);
+INSERT INTO `Status_Code` VALUES ('s5',NULL,NULL);
+INSERT INTO `Status_Code` VALUES ('s6',NULL,NULL);
+INSERT INTO `Status_Code` VALUES ('s7',NULL,NULL);
+INSERT INTO `Status_Code` VALUES ('s8',NULL,NULL);
+COMMIT;
