@@ -33,9 +33,9 @@ def bot_code_sent(number,ip,code,st):
         del_mess_list[number].append(data['result']['message_id'])
         print(del_mess_list[number])
     elif code == 200:
-        response = requests.get('https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=\u2705 Сервер %s.open.by начал работать в штатном режиме, код ответа %s' %(token,chat_id_All, number, code))
+        response = requests.get('https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=\u2705 Сервер %s.open.by начал работать в штатном режиме, код ответа %s' %(token,chat_id_Test_group, number, code))
         for i, server in enumerate(del_mess_list[number]):
-            response = requests.get('https://api.telegram.org/bot%s/deleteMessage?chat_id=%s&message_id=%s' %(token,chat_id_All, server))
+            response = requests.get('https://api.telegram.org/bot%s/deleteMessage?chat_id=%s&message_id=%s' %(token,chat_id_Test_group, server))
         print(response.content)
 
 def get_all_status(status):
@@ -51,19 +51,19 @@ def get_all_status(status):
         elif len(server_status)== 0:
             check=0
     if len(server_status)!= 0 and (check_str.lower() != server_status.lower()):
-        response = requests.get('https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=\u26A0 Внимание!  Обнаружена проблема с доступом к серверу(ам):\n%s' %(token,chat_id_All, server_status))
+        response = requests.get('https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=\u26A0 Внимание!  Обнаружена проблема с доступом к серверу(ам):\n%s' %(token,chat_id_Test_group, server_status))
         data = response.json()
         check_mess_id=data['result']['message_id']
-        requests.get('https://api.telegram.org/bot%s/pinChatMessage?chat_id=%s&message_id=%s' %(token,chat_id_All, data['result']['message_id']))
+        requests.get('https://api.telegram.org/bot%s/pinChatMessage?chat_id=%s&message_id=%s' %(token,chat_id_Test_group, data['result']['message_id']))
         check_str=server_status
         check=1 
     elif check_mess_id != 0 and check==0:
-        requests.get('https://api.telegram.org/bot%s/unpinChatMessage?chat_id=%s&message_id=%s' %(token,chat_id_All, check_mess_id))
+        requests.get('https://api.telegram.org/bot%s/unpinChatMessage?chat_id=%s&message_id=%s' %(token,chat_id_Test_group, check_mess_id))
         check=0
 		
 def send_message_parser(message):
     header_mess ="Change information  about servers:"
-    requests.get('https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=%s\n%s' %(token,chat_id_Maxim, header_mess, message))
+    requests.get('https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=%s\n%s' %(token,chat_id_Test_group, header_mess, message))
 
 
 def get_reputation_server():
